@@ -1,0 +1,105 @@
+---
+import '../styles/global.css';
+import { links, meta, product } from '../data/copy';
+
+const base = import.meta.env.BASE_URL;
+const origin = Astro.site ?? new URL('https://timeroute.github.io');
+const canonical = new URL(base, origin).href;
+const image = new URL('logo.png', canonical).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: product.name,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Windows 10 x64, Windows 11 x64',
+  softwareVersion: product.versionNumber,
+  license: links.license,
+  downloadUrl: links.msi,
+  codeRepository: links.repo,
+  url: canonical,
+  image,
+  inLanguage: ['zh-CN', 'en'],
+  description: meta.description.zh,
+};
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title.zh}</title>
+    <meta name="description" content={meta.description.zh} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="zh-CN" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <meta name="theme-color" content="#054552" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:site_name" content={product.name} />
+    <meta property="og:title" content={meta.title.zh} />
+    <meta property="og:description" content={meta.description.zh} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={meta.title.zh} />
+    <meta name="twitter:description" content={meta.description.zh} />
+    <meta name="twitter:image" content={image} />
+    <link rel="icon" type="image/png" href={`${base}favicon.png`} />
+    <link rel="apple-touch-icon" href={`${base}logo.png`} />
+    <script is:inline define:vars={{ titles: meta.title, descriptions: meta.description }}>
+      (function () {
+        try {
+          if (localStorage.getItem('wslc-lang') === 'en') {
+            document.documentElement.lang = 'en';
+            document.title = titles.en;
+            var description = document.querySelector('meta[name="description"]');
+            if (description) description.setAttribute('content', descriptions.en);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip" href="#main"><span class="zh" lang="zh-CN">跳到主要内容</span><span class="en" lang="en">Skip to content</span></a>
+    <slot />
+    <script is:inline define:vars={{ titles: meta.title, descriptions: meta.description }}>
+      (function () {
+        var KEY = 'wslc-lang';
+
+        function normalized(value) {
+          return value === 'en' ? 'en' : 'zh-CN';
+        }
+
+        function apply(lang, persist) {
+          var next = normalized(lang);
+          var key = next === 'en' ? 'en' : 'zh';
+          document.documentElement.lang = next;
+          document.title = titles[key];
+          var description = document.querySelector('meta[name="description"]');
+          if (description) description.setAttribute('content', descriptions[key]);
+          document.querySelectorAll('[data-lang-btn]').forEach(function (button) {
+            var on = normalized(button.getAttribute('data-lang-btn')) === next;
+            button.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          if (persist) {
+            try {
+              localStorage.setItem(KEY, next === 'en' ? 'en' : 'zh');
+            } catch (e) {}
+          }
+        }
+
+        document.querySelectorAll('[data-lang-btn]').forEach(function (button) {
+          button.addEventListener('click', function () {
+            apply(button.getAttribute('data-lang-btn'), true);
+          });
+        });
+
+        apply(document.documentElement.lang, false);
+      })();
+    </script>
+  </body>
+</html>

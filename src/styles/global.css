@@ -169,6 +169,7 @@ html[lang="en"] .zh {
   display: flex;
   align-items: center;
   gap: 18px;
+  min-width: 0;
 }
 
 .nav-links a {
@@ -572,6 +573,60 @@ h2 {
   background: #007890;
 }
 
+.shot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 18px;
+}
+
+.shot {
+  margin: 0;
+  min-width: 0;
+}
+
+.shot-lead {
+  grid-column: 1 / -1;
+}
+
+.shot-frame {
+  background: #071114;
+  border-radius: 22px;
+  padding: 10px;
+  border: 1px solid rgba(7, 17, 20, 0.35);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 28px 60px rgba(4, 28, 34, 0.18);
+}
+
+.shot-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  background: #000;
+}
+
+.shot figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin-top: 12px;
+}
+
+.shot-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.shot-caption {
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
 .req-grid,
 .download-grid {
   display: grid;
@@ -779,8 +834,13 @@ h2 {
   .req-grid,
   .download-grid,
   .facts,
-  .feature-grid {
+  .feature-grid,
+  .shot-grid {
     grid-template-columns: 1fr;
+  }
+
+  .shot-lead {
+    grid-column: auto;
   }
 
   .facts article + article {
@@ -805,7 +865,7 @@ h2 {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1040px) {
   .site-header {
     height: auto;
   }
@@ -826,6 +886,7 @@ h2 {
   .brand {
     grid-area: brand;
     margin-right: 0;
+    min-width: 0;
   }
 
   .lang {
@@ -835,13 +896,32 @@ h2 {
   .nav-links {
     grid-area: nav;
     width: auto;
+    min-width: 0;
+    flex-wrap: wrap;
     justify-content: flex-start;
-    gap: 16px;
+    gap: 8px 14px;
   }
 
   .header-cta {
     grid-area: cta;
     justify-self: end;
+  }
+}
+
+@media (max-width: 720px) {
+  .header-inner {
+    grid-template-areas:
+      "brand lang"
+      "nav nav"
+      "cta cta";
+  }
+
+  .nav-links {
+    width: 100%;
+  }
+
+  .header-cta {
+    justify-self: start;
   }
 
   .tag {

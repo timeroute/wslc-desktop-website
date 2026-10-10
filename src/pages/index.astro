@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Text from '../components/Text.astro';
-import { features, links, nav, product, steps } from '../data/copy';
+import { features, links, nav, product, screenshots, steps } from '../data/copy';
 
 const base = import.meta.env.BASE_URL;
 const external = { target: '_blank', rel: 'noopener noreferrer' };
@@ -138,6 +138,50 @@ const external = { target: '_blank', rel: 'noopener noreferrer' };
             <p class="fact-label"><Text zh="退出应用" en="On exit" /></p>
             <p class="plain"><Text zh="不会终止会话" en="Does not terminate the session" /></p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shots" id="screenshots" aria-labelledby="screenshots-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow"><Text zh="界面预览" en="Screenshots" /></p>
+          <h2 id="screenshots-title"><Text zh="应用里的三个画面" en="Three views from the app" /></h2>
+          <p>
+            <Text
+              zh="总览、容器日志，以及拉取镜像。下面是应用的真实界面。"
+              en="Overview, container logs, and pulling an image — real screens from the app."
+            />
+          </p>
+        </div>
+        <div class="shot-grid">
+          {
+            screenshots.map((shot, index) => (
+              <figure class:list={['shot', { 'shot-lead': index === 0 }]}>
+                <div class="shot-frame">
+                  <img
+                    src={`${base}${shot.src}`}
+                    width={shot.width}
+                    height={shot.height}
+                    alt={shot.alt.zh}
+                    data-alt-zh={shot.alt.zh}
+                    data-alt-en={shot.alt.en}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                </div>
+                <figcaption>
+                  <p class="shot-name">
+                    <span class="idx">{String(index + 1).padStart(2, '0')}</span>
+                    <Text zh={shot.zh} en={shot.en} />
+                  </p>
+                  <p class="shot-caption">
+                    <Text zh={shot.caption.zh} en={shot.caption.en} />
+                  </p>
+                </figcaption>
+              </figure>
+            ))
+          }
         </div>
       </div>
     </section>

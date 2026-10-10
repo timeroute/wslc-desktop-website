@@ -85,6 +85,9 @@ const jsonLd = {
             var on = normalized(button.getAttribute('data-lang-btn')) === next;
             button.setAttribute('aria-pressed', on ? 'true' : 'false');
           });
+          document.querySelectorAll('[data-alt-zh]').forEach(function (img) {
+            img.alt = img.getAttribute(key === 'en' ? 'data-alt-en' : 'data-alt-zh') || '';
+          });
           if (persist) {
             try {
               localStorage.setItem(KEY, next === 'en' ? 'en' : 'zh');

@@ -37,9 +37,58 @@ export type Localized = {
 };
 
 export const nav = [
+  { href: '#screenshots', zh: '界面', en: 'Screenshots' },
   { href: '#features', zh: '功能', en: 'Features' },
   { href: '#requirements', zh: '环境', en: 'Requirements' },
   { href: '#download', zh: '下载', en: 'Download' },
+] as const;
+
+export const screenshots = [
+  {
+    src: 'screenshots/overview.png',
+    width: 2164,
+    height: 1442,
+    zh: '总览',
+    en: 'Overview',
+    caption: {
+      zh: '引擎为 LIVE，并显示资源与会话 wslc-desktop。',
+      en: 'The engine is LIVE, with resources and the wslc-desktop session.',
+    },
+    alt: {
+      zh: 'WSLc Desktop 总览：引擎 LIVE、资源，以及会话 wslc-desktop',
+      en: 'WSLc Desktop Overview: engine LIVE, resources, and the wslc-desktop session',
+    },
+  },
+  {
+    src: 'screenshots/containers-logs.png',
+    width: 2164,
+    height: 1442,
+    zh: '容器',
+    en: 'Containers',
+    caption: {
+      zh: '查看 nginx 容器的日志。',
+      en: 'Container logs for nginx.',
+    },
+    alt: {
+      zh: 'WSLc Desktop 容器页：nginx 容器日志窗口',
+      en: 'WSLc Desktop Containers: logs window for an nginx container',
+    },
+  },
+  {
+    src: 'screenshots/images-pull.png',
+    width: 2164,
+    height: 1442,
+    zh: '镜像',
+    en: 'Images',
+    caption: {
+      zh: '拉取镜像 alpine:latest。',
+      en: 'Pull dialog for alpine:latest.',
+    },
+    alt: {
+      zh: 'WSLc Desktop 镜像页：拉取 alpine:latest',
+      en: 'WSLc Desktop Images: pull dialog for alpine:latest',
+    },
+  },
 ] as const;
 
 export const features: {

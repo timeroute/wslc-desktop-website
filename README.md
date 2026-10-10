@@ -1,6 +1,6 @@
 # WSLc Desktop 网站
 
-[WSLc Desktop](https://github.com/timeroute/wslc-desktop) 的产品介绍与下载页。页面以中文为默认语言，可切换英文。安装包不在本仓库内，下载链接指向 GitHub Releases 上的 MSI。
+[WSLc Desktop](https://github.com/timeroute/wslc-desktop) 的产品介绍与下载页。页面以中文为默认语言，可切换英文。安装包不在本仓库内，下载链接指向 GitHub Releases 上的 MSI。`public/screenshots/` 里是应用的真实界面，不要换成示意图。
 
 线上地址：**https://timeroute.github.io/wslc-desktop-website/**
 

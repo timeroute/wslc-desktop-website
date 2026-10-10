@@ -63,8 +63,8 @@ export const screenshots = [
     src: 'screenshots/containers-logs.png',
     width: 2164,
     height: 1442,
-    zh: '容器',
-    en: 'Containers',
+    zh: '容器日志',
+    en: 'Containers logs',
     caption: {
       zh: '查看 nginx 容器的日志。',
       en: 'Container logs for nginx.',
@@ -78,8 +78,8 @@ export const screenshots = [
     src: 'screenshots/images-pull.png',
     width: 2164,
     height: 1442,
-    zh: '镜像',
-    en: 'Images',
+    zh: '拉取镜像',
+    en: 'Pull image',
     caption: {
       zh: '拉取镜像 alpine:latest。',
       en: 'Pull dialog for alpine:latest.',

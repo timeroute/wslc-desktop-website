@@ -1,0 +1,46 @@
+---
+import Text from './Text.astro';
+import { links, nav } from '../data/copy';
+
+const base = import.meta.env.BASE_URL;
+
+function hrefFor(href: string) {
+  if (/^https?:\/\//.test(href)) return href;
+  return `${base}${href}`;
+}
+
+function isCurrent(href: string) {
+  if (href.startsWith('#') || /^https?:\/\//.test(href)) return false;
+  const target = new URL(href, new URL(base, Astro.url.origin)).pathname.replace(/\/$/, '');
+  const here = Astro.url.pathname.replace(/\/$/, '');
+  return here === target;
+}
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href={base}>
+      <img class="logo" src={`${base}logo.png`} width="256" height="256" alt="WSLc Desktop" />
+      <span>
+        <span class="word">WSLc Desktop</span>
+        <span class="tag"><Text zh="WSL 容器桌面" en="WSL container desktop" /></span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="页面 Pages">
+      {
+        nav.map((item) => (
+          <a href={hrefFor(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            <Text zh={item.zh} en={item.en} />
+          </a>
+        ))
+      }
+    </nav>
+    <div class="lang" role="group" aria-label="语言 Language">
+      <button type="button" data-lang-btn="zh" aria-pressed="true">中文</button>
+      <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-primary header-cta" href={links.msi}>
+      <Text zh="下载 MSI" en="Download MSI" />
+    </a>
+  </div>
+</header>

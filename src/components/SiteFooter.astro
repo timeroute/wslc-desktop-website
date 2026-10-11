@@ -1,0 +1,27 @@
+---
+import Text from './Text.astro';
+import { links, product } from '../data/copy';
+
+const base = import.meta.env.BASE_URL;
+const external = { target: '_blank', rel: 'noopener noreferrer' };
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img class="logo" src={`${base}logo.png`} width="256" height="256" alt="" />
+      <div>
+        <p class="footer-name">WSLc Desktop</p>
+        <p class="footer-license">
+          <a href={links.license} {...external}>{product.license}</a>
+          <span> · {product.version}</span>
+        </p>
+      </div>
+    </div>
+    <nav class="footer-links" aria-label="相关链接 Links">
+      <a href={links.repo} {...external}><Text zh="产品仓库" en="Product repository" /></a>
+      <a href={links.releases} {...external}>Releases</a>
+      <a href={links.websiteRepo} {...external}><Text zh="网站仓库" en="Website repository" /></a>
+    </nav>
+  </div>
+</footer>

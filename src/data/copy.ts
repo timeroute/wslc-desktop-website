@@ -34,6 +34,7 @@ export const nav = [
   { href: '#features', zh: '功能', en: 'Features' },
   { href: '#screenshots', zh: '界面', en: 'Screenshots' },
   { href: '#download', zh: '下载', en: 'Download' },
+  { href: 'changelog/', zh: '更新日志', en: 'Changelog' },
 ] as const;
 
 export const screenshots = [

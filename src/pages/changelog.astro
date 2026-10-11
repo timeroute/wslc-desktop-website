@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Text from '../components/Text.astro';
+
+const entries = await getCollection('changelog');
+const entry = entries.find((item) => item.id === 'changelog') ?? entries[0];
+const data = entry?.data as { placeholder?: boolean } | undefined;
+const missing = !entry || data?.placeholder === true;
+const Content = entry && !missing ? (await render(entry)).Content : null;
+
+const title = {
+  zh: 'WSLc Desktop 更新日志',
+  en: 'WSLc Desktop changelog',
+};
+const description = {
+  zh: 'WSLc Desktop 更新日志。',
+  en: 'WSLc Desktop changelog.',
+};
+---
+
+<Base title={title} description={description} canonicalPath="changelog/">
+  <SiteHeader />
+  <main id="main">
+    <section class="section changelog" aria-label="更新日志 Changelog">
+      <div class="wrap">
+        {
+          missing || !Content ? (
+            <>
+              <h1 id="changelog-title" class="page-title">
+                <Text zh="更新日志" en="Changelog" />
+              </h1>
+              <p class="changelog-empty">
+                <Text zh="暂无更新日志" en="No changelog yet." />
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 id="changelog-title" class="page-title">
+                <Text zh="更新日志" en="Changelog" />
+              </h1>
+              <div class="changelog-body">
+                <Content />
+              </div>
+            </>
+          )
+        }
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</Base>

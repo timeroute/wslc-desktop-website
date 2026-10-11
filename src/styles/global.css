@@ -178,7 +178,8 @@ html[lang="en"] .zh {
   font-size: 0.95rem;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a[aria-current='page'] {
   color: var(--teal-800);
 }
 
@@ -970,6 +971,114 @@ h2 {
   h1 {
     letter-spacing: -0.03em;
   }
+}
+
+.page-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.changelog-empty {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+.changelog-body {
+  max-width: 46rem;
+  margin-top: 22px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: clamp(18px, 3vw, 32px);
+}
+
+.changelog-body :where(h1, h2, h3, h4) {
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  margin-top: 1.35em;
+}
+
+.changelog-body h1 {
+  font-size: 1.45rem;
+  margin-top: 0;
+}
+
+.changelog-body h2 {
+  font-size: 1.28rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.changelog-body h3 {
+  font-size: 1.05rem;
+}
+
+.changelog-body :where(p, ul, ol, pre, blockquote, table) {
+  margin-top: 0.75em;
+}
+
+.changelog-body :where(ul, ol) {
+  padding-left: 1.25rem;
+}
+
+.changelog-body ul {
+  list-style: disc;
+}
+
+.changelog-body ol {
+  list-style: decimal;
+}
+
+.changelog-body li + li {
+  margin-top: 0.28em;
+}
+
+.changelog-body :where(ul, ol) :where(ul, ol) {
+  margin-top: 0.28em;
+}
+
+.changelog-body a {
+  text-underline-offset: 0.18em;
+}
+
+.changelog-body pre {
+  padding: 12px 14px;
+  overflow: auto;
+  background: var(--teal-950);
+  color: #f4fbfc;
+  border-radius: 12px;
+}
+
+.changelog-body pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.changelog-body blockquote {
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--teal-800);
+  color: var(--muted);
+}
+
+.changelog-body hr {
+  margin: 1.4em 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.changelog-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.changelog-body :where(th, td) {
+  text-align: left;
+  padding: 0.4em 0.6em;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
 }
 
 @media (prefers-reduced-motion: reduce) {

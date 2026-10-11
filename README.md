@@ -24,11 +24,11 @@ npm run preview
 
 ## 更新日志
 
-`npm run dev` 和 `npm run build` 会先从产品仓库拉取：
+`npm run dev` 和 `npm run build` 会按 `src/data/copy.ts` 里的 `versionNumber` 拉取对应 tag 上的更新日志，例如当前 v0.1.2：
 
-https://raw.githubusercontent.com/timeroute/wslc-desktop/main/CHANGELOG.md
+https://raw.githubusercontent.com/timeroute/wslc-desktop/v0.1.2/CHANGELOG.md
 
-拉到的文件写到 `src/content/changelog.md`（不提交），页面在 `/changelog/`。上游还没有这个文件，或请求失败时，页面显示「暂无更新日志」，构建继续。部署工作流在 `astro build` 之前会再拉一次，所以每次 Pages 发布都用 `main` 上的最新内容。
+拉到的文件写到 `src/content/changelog.md`（不提交），页面在 `/changelog/`。这样页面和正在提供的 MSI 是同一版。上游还没有这个文件，或请求失败时，页面显示「暂无更新日志」，构建继续。部署工作流在 `astro build` 之前会再拉一次。
 
 ## 部署到 GitHub Pages
 
@@ -78,4 +78,4 @@ GitHub Pages setup:
 
 Astro is configured with `site: 'https://timeroute.github.io'` and `base: '/wslc-desktop-website/'`.
 
-The changelog page (`/changelog/`) is rendered from `CHANGELOG.md` on `timeroute/wslc-desktop` `main`. Dev and build fetch it first. A missing file shows “暂无更新日志” / “No changelog yet.” and does not fail the build. The Pages workflow fetches it again before `astro build`.
+The changelog page (`/changelog/`) is rendered from `CHANGELOG.md` on the `timeroute/wslc-desktop` tag that matches `versionNumber` in `src/data/copy.ts` (currently `v0.1.2`), so the page matches the MSI. Dev and build fetch it first. A missing file shows “暂无更新日志” / “No changelog yet.” and does not fail the build. The Pages workflow fetches it again before `astro build`.

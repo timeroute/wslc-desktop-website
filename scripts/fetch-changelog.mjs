@@ -1,8 +1,14 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const SOURCE = 'https://raw.githubusercontent.com/timeroute/wslc-desktop/main/CHANGELOG.md';
+const copy = await readFile(new URL('../src/data/copy.ts', import.meta.url), 'utf8');
+const version = copy.match(/versionNumber:\s*'([^']+)'/)?.[1];
+if (!version) {
+  throw new Error('versionNumber not found in src/data/copy.ts');
+}
+
+const SOURCE = `https://raw.githubusercontent.com/timeroute/wslc-desktop/v${version}/CHANGELOG.md`;
 const outFile = fileURLToPath(new URL('../src/content/changelog.md', import.meta.url));
 
 const placeholder = `---

@@ -52,9 +52,9 @@ https://raw.githubusercontent.com/timeroute/wslc-desktop/main/CHANGELOG.md
 
 ## 下载链接
 
-当前版本 **v0.1.0**：
+当前版本 **v0.1.2**：
 
-https://github.com/timeroute/wslc-desktop/releases/download/v0.1.0/WSLc.Desktop-0.1.0-x86_64.msi
+https://github.com/timeroute/wslc-desktop/releases/download/v0.1.2/WSLc.Desktop-0.1.2-x86_64.msi
 
 不要把 `.msi` 提交进这个仓库。
 

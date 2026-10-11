@@ -1,13 +1,14 @@
 export const product = {
   name: 'WSLc Desktop',
-  version: 'v0.1.0',
-  versionNumber: '0.1.0',
-  msiName: 'WSLc.Desktop-0.1.0-x86_64.msi',
+  version: 'v0.1.2',
+  versionNumber: '0.1.2',
+  msiName: 'WSLc.Desktop-0.1.2-x86_64.msi',
   license: 'Apache-2.0',
 } as const;
 
 export const links = {
-  msi: 'https://github.com/timeroute/wslc-desktop/releases/download/v0.1.0/WSLc.Desktop-0.1.0-x86_64.msi',
+  msi: 'https://github.com/timeroute/wslc-desktop/releases/download/v0.1.2/WSLc.Desktop-0.1.2-x86_64.msi',
+  latest: 'https://github.com/timeroute/wslc-desktop/releases/latest',
   releases: 'https://github.com/timeroute/wslc-desktop/releases',
   repo: 'https://github.com/timeroute/wslc-desktop',
   license: 'https://www.apache.org/licenses/LICENSE-2.0',

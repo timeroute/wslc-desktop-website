@@ -191,7 +191,10 @@ html[lang="en"] .zh {
   background: rgba(4, 50, 58, 0.05);
 }
 
-.lang button {
+.lang a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   background: transparent;
   color: var(--muted);
@@ -199,6 +202,8 @@ html[lang="en"] .zh {
   padding: 0 0.75rem;
   border-radius: 999px;
   cursor: pointer;
+  text-decoration: none;
+  line-height: 1.2;
 }
 
 html:not([lang="en"]) [data-lang-btn="zh"],

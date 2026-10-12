@@ -1,17 +1,23 @@
 ---
 import Text from './Text.astro';
 import { links, nav } from '../data/copy';
+import { homePath, langOf, localePath, siteBase } from '../lib/locale';
 
 const base = import.meta.env.BASE_URL;
+const lang = langOf(Astro.url.pathname, base);
+const root = siteBase(base);
+const zhHref = localePath(Astro.url.pathname, base, 'zh');
+const enHref = localePath(Astro.url.pathname, base, 'en');
 
 function hrefFor(href: string) {
-  if (/^https?:\/\//.test(href)) return href;
-  return `${base}${href}`;
+  if (/^https?:\/\//.test(href) || href.startsWith('#')) return href;
+  const prefix = lang === 'en' ? 'en/' : '';
+  return `${root}${prefix}${href.replace(/^\//, '')}`;
 }
 
 function isCurrent(href: string) {
   if (href.startsWith('#') || /^https?:\/\//.test(href)) return false;
-  const target = new URL(href, new URL(base, Astro.url.origin)).pathname.replace(/\/$/, '');
+  const target = hrefFor(href).replace(/\/$/, '');
   const here = Astro.url.pathname.replace(/\/$/, '');
   return here === target;
 }
@@ -19,7 +25,7 @@ function isCurrent(href: string) {
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href={base}>
+    <a class="brand" href={homePath(base, lang)}>
       <img class="logo" src={`${base}logo.png`} width="256" height="256" alt="WSLc Desktop" />
       <span>
         <span class="word">WSLc Desktop</span>
@@ -36,8 +42,8 @@ function isCurrent(href: string) {
       }
     </nav>
     <div class="lang" role="group" aria-label="语言 Language">
-      <button type="button" data-lang-btn="zh" aria-pressed="true">中文</button>
-      <button type="button" data-lang-btn="en" aria-pressed="false">EN</button>
+      <a href={zhHref} data-lang-btn="zh" hreflang="zh-CN" aria-pressed={lang === 'zh' ? 'true' : 'false'}>中文</a>
+      <a href={enHref} data-lang-btn="en" hreflang="en" aria-pressed={lang === 'en' ? 'true' : 'false'}>EN</a>
     </div>
     <a class="btn btn-primary header-cta" href={links.msi}>
       <Text zh="下载 MSI" en="Download MSI" />

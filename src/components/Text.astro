@@ -1,10 +1,13 @@
 ---
+import { langOf } from '../lib/locale';
+
 interface Props {
   zh: string;
   en: string;
 }
 
 const { zh, en } = Astro.props;
+const lang = langOf(Astro.url.pathname, import.meta.env.BASE_URL);
 ---
 
-<span class="zh" lang="zh-CN">{zh}</span><span class="en" lang="en">{en}</span>
+{lang === 'en' ? <span class="en" lang="en">{en}</span> : <span class="zh" lang="zh-CN">{zh}</span>}

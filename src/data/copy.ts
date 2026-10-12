@@ -31,6 +31,17 @@ export type Localized = {
   en: string;
 };
 
+export const hero = {
+  note: {
+    zh: '不是 Docker Desktop，也不是发行版管理器。',
+    en: 'Not Docker Desktop, not a distro manager.',
+  },
+  facts: [
+    { zh: '需要 WSL 2.9.3+', en: 'Requires WSL 2.9.3+' },
+    { zh: '首次启动会安装 SDK', en: 'Installs the SDK on first launch' },
+  ],
+} as const;
+
 export const nav = [
   { href: '#features', zh: '功能', en: 'Features' },
   { href: '#screenshots', zh: '界面', en: 'Screenshots' },

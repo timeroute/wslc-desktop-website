@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://timeroute.github.io/wslc-desktop-website/sitemap-index.xml

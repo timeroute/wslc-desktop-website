@@ -1,7 +1,7 @@
 # build output
 dist/
 
-# fetched from the advertised timeroute/wslc-desktop tag at build time
+# written from the latest release (or the last known release) at build time
 src/content/changelog.md
 
 # generated types

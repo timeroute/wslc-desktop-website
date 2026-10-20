@@ -24,11 +24,11 @@ npm run preview
 
 ## 更新日志
 
-`npm run dev` 和 `npm run build` 会按 `src/data/copy.ts` 里的 `versionNumber` 拉取对应 tag 上的更新日志，例如当前 v0.1.2：
+`npm run dev` 和 `npm run build` 会请求 [wslc-desktop 的最新正式发布](https://github.com/timeroute/wslc-desktop/releases/latest)，读取版本号、MSI 地址和更新说明。更新说明优先用该 tag 上的 `CHANGELOG.md`；仓库里还没有这个文件时，改用 Release 正文。结果写到 `src/content/changelog.md`（不提交），页面在 `/changelog/`，和正在提供的 MSI 是同一版。
 
-https://raw.githubusercontent.com/timeroute/wslc-desktop/v0.1.2/CHANGELOG.md
+发布 API 不可用、超时，或这次发布里没有 MSI 时，改用仓库里上次已知的发布：`src/data/release.json`（版本号和下载地址）和 `src/data/changelog.fallback.md`（更新说明）。构建继续，页面仍能打开。部署工作流在 `astro build` 之前会再拉一次。
 
-拉到的文件写到 `src/content/changelog.md`（不提交），页面在 `/changelog/`。这样页面和正在提供的 MSI 是同一版。上游还没有这个文件，或请求失败时，页面显示「暂无更新日志」，构建继续。部署工作流在 `astro build` 之前会再拉一次。
+首页和英文页上的版本号、安装包文件名、下载链接，以及结构化数据里的 `softwareVersion` / `downloadUrl`，都读这次解析出的发布，不在页面里手写版本。
 
 ## 部署到 GitHub Pages
 
@@ -52,11 +52,7 @@ https://raw.githubusercontent.com/timeroute/wslc-desktop/v0.1.2/CHANGELOG.md
 
 ## 下载链接
 
-当前版本 **v0.1.2**：
-
-https://github.com/timeroute/wslc-desktop/releases/download/v0.1.2/WSLc.Desktop-0.1.2-x86_64.msi
-
-不要把 `.msi` 提交进这个仓库。
+下载按钮指向本次构建解析到的 MSI：最新正式发布上的安装包，或发布 API 不可用时 `src/data/release.json` 里的上次已知地址。不要把 `.msi` 提交进这个仓库。
 
 ## English
 
@@ -78,4 +74,4 @@ GitHub Pages setup:
 
 Astro is configured with `site: 'https://timeroute.github.io'` and `base: '/wslc-desktop-website/'`.
 
-The changelog page (`/changelog/`) is rendered from `CHANGELOG.md` on the `timeroute/wslc-desktop` tag that matches `versionNumber` in `src/data/copy.ts` (currently `v0.1.2`), so the page matches the MSI. Dev and build fetch it first. A missing file shows “暂无更新日志” / “No changelog yet.” and does not fail the build. The Pages workflow fetches it again before `astro build`.
+Dev and build request the latest stable GitHub release of `timeroute/wslc-desktop` and read its version, MSI URL, and notes. Notes come from `CHANGELOG.md` on that tag, or from the release body when that file is missing. The changelog page (`/changelog/`) renders the result, so it matches the MSI. If the release API is unavailable, times out, or has no MSI, the build uses the last known release in `src/data/release.json` and `src/data/changelog.fallback.md` and still succeeds. Version text, download links, and the `softwareVersion` / `downloadUrl` structured data on the Chinese and English pages all read this resolved release. The Pages workflow fetches again before `astro build`.

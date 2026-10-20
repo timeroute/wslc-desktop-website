@@ -5,9 +5,9 @@
   "description": "Marketing and download site for WSLc Desktop.",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/fetch-changelog.mjs",
+    "predev": "node scripts/fetch-release.mjs",
     "dev": "astro dev",
-    "prebuild": "node scripts/fetch-changelog.mjs",
+    "prebuild": "node scripts/fetch-release.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "generate:og": "node scripts/generate-og.mjs"
